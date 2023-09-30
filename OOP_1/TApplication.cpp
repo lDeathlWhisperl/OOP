@@ -35,6 +35,7 @@ void TApplication::menu()
 		break;
 	case 3:
 		number x;
+		std::cout << "x: ";
 		std::cin >> x;
 		std::cout << polynom->solve(x);
 		break;
