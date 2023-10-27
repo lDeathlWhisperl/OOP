@@ -1,6 +1,7 @@
 #include "Polynom.h"
 #include <sstream>
 #include <cmath>
+#include <typeinfo>
 
 void Polynom::solve()
 {
@@ -15,7 +16,7 @@ void Polynom::solve()
 		return;
 	}
 	
-	double D = b * b - 4 * a * c;
+	number D = b * b - 4 * a * c;
 	
 	if(D < 0)
 		std::cout << "\x1b[44mThere are no valid roots\x1b[0m\n";

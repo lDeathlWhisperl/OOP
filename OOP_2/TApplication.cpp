@@ -34,11 +34,13 @@ void TApplication::menu()
 		polynom->solve();
 		break;
 	case 3:
+	{
 		number x;
 		std::cout << "\x1b[44mx: ";
 		std::cin >> x;
 		
 		std::cout << "\x1b[0m\x1b[44m" << polynom->solve(x) << "\x1b[0m";
+	}
 		break;
 	case 4:
 		std::cout << "\x1b[44m" << *polynom << "\x1b[0m\n";
