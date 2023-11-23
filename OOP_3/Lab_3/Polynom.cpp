@@ -43,23 +43,44 @@ number Polynom::solve(number x)
 	return a * x * x + b * x + c;
 }
 
-QString& operator<<(QString& out, Polynom &p)
+QString sign(number num)
 {
+    auto abs { [](number num) {return num < 0 ? num * -1 : num;} };
     QString str;
 
-    str << p.a;
-    out += str;
-    out += "X² + ";
+    if(num == -1)
+        return " - ";
+    else if(num == 1)
+        return " + ";
 
-    str = "";
+    if(num < 0)
+    {
+        str += " - ";
+        str << abs(num);
+        return str;
+    }
 
-    str << p.b;
-    out += str;
-    out += "X + ";
+    str += " + ";
+    str << num;
+    return str;
+}
 
-    str = "";
 
-    str << p.c;
-    out += str + " = 0";
+QString& operator<<(QString& out, Polynom &p)
+{
+    auto abs { [](number num) {return num < 0 ? num * -1 : num;} };
+    QString temp;
+    temp << p.a;
+
+    out += ((abs(p.a) == 1) ? (p.a < 0 ? "-" : "") : temp);
+    out += "x²";
+    out += sign(p.b);
+    out += "x";
+
+    temp = "";
+    temp << abs(p.c);
+
+    out += ((p.c == 0) ? "" : ((p.c < 0) ? (" - " + temp) : (" + " + temp)));
+    out += " = 0";
 	return out;
 }
