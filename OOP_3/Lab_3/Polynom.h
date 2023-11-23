@@ -16,9 +16,9 @@ public:
 	number solve(number);
     friend QString& operator<<(QString&, Polynom&);
 
-    number getA() { return a; }
-    number getB() { return b; }
-    number getC() { return c; }
+    number getA() const { return a; }
+    number getB() const { return b; }
+    number getC() const { return c; }
 
     void setA(number a) { this->a = a; }
     void setB(number b) { this->b = b; }
