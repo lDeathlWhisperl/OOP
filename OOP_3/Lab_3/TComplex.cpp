@@ -10,11 +10,16 @@ TComplex sqrt(TComplex complex)
 
 QString& operator<<(QString& out, TComplex complex)
 {
-    out += "(";
-    out += QString().setNum(complex.real);
-    out += (complex.imaginary < 0 ? " - " : " + ");
-    out += (complex.imaginary < 0 ? QString().setNum(complex.imaginary * -1) : QString().setNum(complex.imaginary));
-    out += "i)";
+    if(complex.imaginary != 0)
+    {
+        out += "(";
+        out += QString().setNum(complex.real);
+        out += (complex.imaginary < 0 ? " - " : " + ");
+        out += (complex.imaginary < 0 ? QString().setNum(complex.imaginary * -1) : QString().setNum(complex.imaginary));
+        out += "i)";
+    }
+    else
+        out += QString().setNum(complex.real);
     return out;
 }
 

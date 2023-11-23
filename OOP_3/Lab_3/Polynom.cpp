@@ -43,9 +43,9 @@ number Polynom::solve(number x)
 	return a * x * x + b * x + c;
 }
 
-QString sign(number num)
+QString sign(double num)
 {
-    auto abs { [](number num) {return num < 0 ? num * -1 : num;} };
+    auto abs { [](double num) {return num < 0 ? -num : num;} };
     QString str;
 
     if(num == -1)
@@ -56,31 +56,52 @@ QString sign(number num)
     if(num < 0)
     {
         str += " - ";
-        str << abs(num);
+        str += QString().setNum(abs(num));
         return str;
     }
 
     str += " + ";
-    str << num;
+    str += QString().setNum(num);
     return str;
 }
 
 
 QString& operator<<(QString& out, Polynom &p)
 {
-    auto abs { [](number num) {return num < 0 ? num * -1 : num;} };
+    auto abs { [](double num) {return num < 0 ? -num : num;} };
     QString temp;
-    temp << p.a;
 
-    out += ((abs(p.a) == 1) ? (p.a < 0 ? "-" : "") : temp);
+    //A//
+    temp << p.a;
+    if(p.a.getIm() == 0)
+        out += ((abs(p.a.getRe()) == 1) ? (p.a.getRe() < 0 ? "-" : "") : temp);
+    else
+        out += temp;
     out += "x²";
-    out += sign(p.b);
+
+    //B//
+    if(p.b.getIm() == 0)
+        out += sign(p.b.getRe());
+    else
+    {
+        out += " + ";
+        out << p.b;
+    }
     out += "x";
 
+    //C//
     temp = "";
-    temp << abs(p.c);
+    if(p.c.getIm() == 0)
+    {
+        temp += QString().setNum(abs(p.c.getRe()));
+        out += ((p.c.getRe() == 0) ? "" : ((p.c.getRe() < 0) ? (" - " + temp) : (" + " + temp)));
+    }
+    else
+    {
+        out += " + ";
+        out << p.c;
+    }
 
-    out += ((p.c == 0) ? "" : ((p.c < 0) ? (" - " + temp) : (" + " + temp)));
     out += " = 0";
 	return out;
 }

@@ -26,9 +26,14 @@ private slots:
 
     void on_Btn_X_clicked();
 
+    void on_CB_Complex_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     class Polynom *polynom;
+
+private:
+    void LE_setHidden(class QLineEdit*, class QLineEdit*, bool, QString);
 };
 
 #endif // MAINWINDOW_H
